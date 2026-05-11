@@ -25,6 +25,30 @@ function AgentApp() {
     return result;
   };
 
+  const connectWifi = () => connectionManager.connect({ type: 'wifi' })
+    .then(() => setErrorMessage(''))
+    .catch((error) => setErrorMessage(error.message));
+
+  const connectBluetooth = () => connectionManager.connect({ type: 'bluetooth' })
+    .then(() => setErrorMessage(''))
+    .catch((error) => setErrorMessage(error.message));
+
+  const disconnectRobot = () => connectionManager.disconnect()
+    .then(() => setErrorMessage(''))
+    .catch((error) => setErrorMessage(error.message));
+
+  const sendAction = (action) => dispatcher.sendAction(action)
+    .then((sent) => {
+      if (sent) {
+        setErrorMessage('');
+      }
+      return sent;
+    })
+    .catch((error) => {
+      setErrorMessage(error.message);
+      return false;
+    });
+
   if (!authenticated) {
     return React.createElement(LoginScreen, { onLogin: handleLogin });
   }
@@ -35,10 +59,10 @@ function AgentApp() {
     React.createElement(ControllerScreen, {
       connectionStatus,
       errorMessage,
-      connectWifi: () => connectionManager.connect({ type: 'wifi' }).then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
-      connectBluetooth: () => connectionManager.connect({ type: 'bluetooth' }).then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
-      disconnect: () => connectionManager.disconnect().then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
-      sendAction: (action) => dispatcher.sendAction(action).then((sent) => { if (sent) setErrorMessage(''); return sent; }).catch((error) => { setErrorMessage(error.message); return false; }),
+      connectWifi,
+      connectBluetooth,
+      disconnect: disconnectRobot,
+      sendAction,
     }),
   );
 }

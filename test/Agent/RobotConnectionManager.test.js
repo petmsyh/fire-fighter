@@ -119,7 +119,9 @@ test('local auth validates and gates access', () => {
   const auth = new LocalAuthService();
 
   assert.equal(auth.isAuthenticated(), false);
-  assert.equal(auth.login('a', '12').valid, false);
+  const shortCredentialResult = auth.login('a', '12');
+  assert.equal(shortCredentialResult.valid, false);
+  assert.equal(shortCredentialResult.error, 'Username or password is too short.');
   assert.equal(auth.login('admin', 'badpass').valid, false);
 
   const result = auth.login('admin', 'firefighter');
