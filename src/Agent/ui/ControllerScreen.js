@@ -27,6 +27,7 @@ function ControllerScreen({
   sendAction,
 }) {
   const connected = connectionStatus === 'connected';
+  const sendStopAction = () => sendAction('STOP');
 
   return React.createElement(
     View,
@@ -53,14 +54,14 @@ function ControllerScreen({
         React.createElement(Text, { style: styles.connectionButtonLabel }, 'Disconnect'),
       ),
     ),
-    React.createElement(DirectionButton, { label: 'Forward', action: 'FORWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
+    React.createElement(DirectionButton, { label: 'Forward', action: 'FORWARD', disabled: !connected, onPressIn: sendAction, onPressOut: sendStopAction }),
     React.createElement(
       View,
       { style: styles.middleRow },
-      React.createElement(DirectionButton, { label: 'Left', action: 'LEFT', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
-      React.createElement(DirectionButton, { label: 'Right', action: 'RIGHT', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
+      React.createElement(DirectionButton, { label: 'Left', action: 'LEFT', disabled: !connected, onPressIn: sendAction, onPressOut: sendStopAction }),
+      React.createElement(DirectionButton, { label: 'Right', action: 'RIGHT', disabled: !connected, onPressIn: sendAction, onPressOut: sendStopAction }),
     ),
-    React.createElement(DirectionButton, { label: 'Backward', action: 'BACKWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
+    React.createElement(DirectionButton, { label: 'Backward', action: 'BACKWARD', disabled: !connected, onPressIn: sendAction, onPressOut: sendStopAction }),
     React.createElement(
       Pressable,
       {

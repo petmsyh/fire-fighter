@@ -11,7 +11,10 @@ class LocalAuthService {
       return { valid: false, error: 'Username and password are required.' };
     }
 
-    if (username.length < 3 || password.length < 4) {
+    if (
+      username.length < this.config.auth.minUsernameLength
+      || password.length < this.config.auth.minPasswordLength
+    ) {
       return { valid: false, error: 'Username or password is too short.' };
     }
 

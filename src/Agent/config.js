@@ -1,5 +1,6 @@
 const DEFAULT_AGENT_CONFIG = {
   connection: {
+    defaultType: 'wifi',
     wifiUrl: 'ws://192.168.4.1:8080',
     bluetoothDeviceId: 'FIRE_FIGHTER_ROBOT',
     maxReconnectAttempts: 5,
@@ -20,6 +21,8 @@ const DEFAULT_AGENT_CONFIG = {
   auth: {
     username: 'admin',
     password: 'firefighter',
+    minUsernameLength: 3,
+    minPasswordLength: 4,
   },
 };
 

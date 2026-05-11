@@ -43,7 +43,7 @@ class RobotConnectionManager {
   }
 
   async connect(options = {}) {
-    const type = options.type || 'wifi';
+    const type = options.type || this.config.connection.defaultType;
     this.manualDisconnect = false;
     this.target = { ...options, type };
 
@@ -129,7 +129,7 @@ class RobotConnectionManager {
     }
 
     if (this.reconnectAttempts >= this.config.connection.maxReconnectAttempts) {
-      this.#setStatus('error', new Error('Maximum reconnect attempts reached.'));
+      this.#setStatus('error', new Error(`Maximum reconnect attempts (${this.config.connection.maxReconnectAttempts}) reached.`));
       return;
     }
 

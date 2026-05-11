@@ -82,7 +82,7 @@ test('auto reconnect uses backoff and stops at max retries', async () => {
 
   await timers[1].fn();
   assert.equal(manager.status, 'error');
-  assert.match(manager.error.message, /Maximum reconnect attempts reached/);
+  assert.match(manager.error.message, /Maximum reconnect attempts \(2\) reached/);
 });
 
 test('stop command bypasses throttle while repeated move command is throttled', async () => {
