@@ -40,7 +40,7 @@ function ControllerScreen({
       React.createElement(
         Pressable,
         { style: styles.connectionButton, onPress: connectWifi },
-        React.createElement(Text, { style: styles.connectionButtonLabel }, 'Connect Wi‑Fi'),
+        React.createElement(Text, { style: styles.connectionButtonLabel }, 'Connect Wi-Fi'),
       ),
       React.createElement(
         Pressable,

@@ -5,7 +5,7 @@ This repository provides a minimal mobile-control implementation focused on `src
 ## What is implemented
 
 - Robot connection manager with:
-  - Wi‑Fi transport (WebSocket)
+  - Wi-Fi transport (WebSocket)
   - Bluetooth transport abstraction (inject BLE/Classic connector)
   - Connection status updates (`disconnected`, `connecting`, `connected`, `reconnecting`, `error`)
   - Auto-reconnect with exponential backoff and max retry
@@ -34,7 +34,7 @@ This repository provides a minimal mobile-control implementation focused on `src
 
 Update `DEFAULT_AGENT_CONFIG` in `src/Agent/config.js`:
 
-- Wi‑Fi endpoint: `connection.wifiUrl`
+- Wi-Fi endpoint: `connection.wifiUrl`
 - Bluetooth target: `connection.bluetoothDeviceId`
 - Reconnect strategy:
   - `maxReconnectAttempts`
