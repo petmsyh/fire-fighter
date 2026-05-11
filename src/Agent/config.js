@@ -19,8 +19,8 @@ const DEFAULT_AGENT_CONFIG = {
     },
   },
   auth: {
-    username: 'admin',
-    password: 'firefighter',
+    username: process.env.FIRE_FIGHTER_APP_USERNAME || 'admin',
+    password: process.env.FIRE_FIGHTER_APP_PASSWORD || 'firefighter',
     minUsernameLength: 3,
     minPasswordLength: 4,
   },

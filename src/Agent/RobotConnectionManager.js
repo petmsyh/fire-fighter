@@ -134,10 +134,10 @@ class RobotConnectionManager {
     }
 
     this.reconnectAttempts += 1;
-    const delay = Math.min(
+    const delay = Math.floor(Math.min(
       this.config.connection.reconnectBaseDelayMs * (2 ** (this.reconnectAttempts - 1)),
       this.config.connection.reconnectMaxDelayMs,
-    );
+    ));
 
     this.#setStatus('reconnecting', null);
 

@@ -53,6 +53,11 @@ new RobotConnectionManager({
 });
 ```
 
+For login defaults, set environment variables to avoid hardcoded credentials in real deployments:
+
+- `FIRE_FIGHTER_APP_USERNAME`
+- `FIRE_FIGHTER_APP_PASSWORD`
+
 ## Bluetooth integration
 
 `BluetoothTransport` expects an injected connector:

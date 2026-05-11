@@ -43,7 +43,11 @@ class WifiWebSocketTransport {
   }
 
   async send(command) {
-    if (!this.socket || this.socket.readyState !== 1) {
+    const openState = this.WebSocketImpl && typeof this.WebSocketImpl.OPEN === 'number'
+      ? this.WebSocketImpl.OPEN
+      : 1;
+
+    if (!this.socket || this.socket.readyState !== openState) {
       throw new Error('Wi-Fi socket is not connected.');
     }
     this.socket.send(command);
