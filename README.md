@@ -22,13 +22,13 @@ This repository provides a minimal mobile-control implementation focused on `src
 
 ## Project structure
 
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/config.js`
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/RobotConnectionManager.js`
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/RobotCommandDispatcher.js`
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/LocalAuthService.js`
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/transports/*`
-- `/home/runner/work/fire-fighter/fire-fighter/src/Agent/ui/*`
-- `/home/runner/work/fire-fighter/fire-fighter/test/Agent/RobotConnectionManager.test.js`
+- `src/Agent/config.js`
+- `src/Agent/RobotConnectionManager.js`
+- `src/Agent/RobotCommandDispatcher.js`
+- `src/Agent/LocalAuthService.js`
+- `src/Agent/transports/*`
+- `src/Agent/ui/*`
+- `test/Agent/RobotConnectionManager.test.js`
 
 ## Configure connection defaults
 
@@ -72,7 +72,6 @@ manager.connect({
 ## Run tests
 
 ```bash
-cd /home/runner/work/fire-fighter/fire-fighter
 node --test test/Agent/*.test.js
 ```
 
@@ -88,4 +87,4 @@ Render `AgentApp` as your app root (or compose into your existing navigation).
 
 A controller/login mock preview image is included at:
 
-- `/home/runner/work/fire-fighter/fire-fighter/docs/agent-ui-preview.png`
+- `docs/agent-ui-preview.png`

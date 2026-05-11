@@ -13,6 +13,7 @@ function AgentApp() {
   const connectionManager = useMemo(() => new RobotConnectionManager(), []);
   const dispatcher = useMemo(() => new RobotCommandDispatcher(connectionManager), [connectionManager]);
   const [authenticated, setAuthenticated] = useState(authService.isAuthenticated());
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => connectionManager.onStatusChange(({ status }) => setConnectionStatus(status)), [connectionManager]);
 
@@ -33,10 +34,11 @@ function AgentApp() {
     { style: { flex: 1 } },
     React.createElement(ControllerScreen, {
       connectionStatus,
-      connectWifi: () => connectionManager.connect({ type: 'wifi' }).catch(() => {}),
-      connectBluetooth: () => connectionManager.connect({ type: 'bluetooth' }).catch(() => {}),
-      disconnect: () => connectionManager.disconnect().catch(() => {}),
-      sendAction: (action) => dispatcher.sendAction(action).catch(() => false),
+      errorMessage,
+      connectWifi: () => connectionManager.connect({ type: 'wifi' }).then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
+      connectBluetooth: () => connectionManager.connect({ type: 'bluetooth' }).then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
+      disconnect: () => connectionManager.disconnect().then(() => setErrorMessage('')).catch((error) => setErrorMessage(error.message)),
+      sendAction: (action) => dispatcher.sendAction(action).then((sent) => { if (sent) setErrorMessage(''); return sent; }).catch((error) => { setErrorMessage(error.message); return false; }),
     }),
   );
 }

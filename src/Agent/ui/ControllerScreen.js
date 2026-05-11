@@ -12,7 +12,7 @@ function DirectionButton({ label, action, disabled, onPressIn, onPressOut }) {
       ],
       disabled,
       onPressIn: () => onPressIn(action),
-      onPressOut: onPressOut,
+      onPressOut: () => onPressOut(action),
     },
     React.createElement(Text, { style: styles.buttonLabel }, label),
   );
@@ -20,6 +20,7 @@ function DirectionButton({ label, action, disabled, onPressIn, onPressOut }) {
 
 function ControllerScreen({
   connectionStatus,
+  errorMessage,
   connectWifi,
   connectBluetooth,
   disconnect,
@@ -32,6 +33,7 @@ function ControllerScreen({
     { style: styles.container },
     React.createElement(Text, { style: styles.header }, 'Robot Controller'),
     React.createElement(Text, { style: styles.status }, `Status: ${connectionStatus}`),
+    errorMessage ? React.createElement(Text, { style: styles.error }, errorMessage) : null,
     React.createElement(
       View,
       { style: styles.connectionRow },
@@ -51,14 +53,14 @@ function ControllerScreen({
         React.createElement(Text, { style: styles.connectionButtonLabel }, 'Disconnect'),
       ),
     ),
-    React.createElement(DirectionButton, { label: 'Forward', action: 'FORWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => {} }),
+    React.createElement(DirectionButton, { label: 'Forward', action: 'FORWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
     React.createElement(
       View,
       { style: styles.middleRow },
-      React.createElement(DirectionButton, { label: 'Left', action: 'LEFT', disabled: !connected, onPressIn: sendAction, onPressOut: () => {} }),
-      React.createElement(DirectionButton, { label: 'Right', action: 'RIGHT', disabled: !connected, onPressIn: sendAction, onPressOut: () => {} }),
+      React.createElement(DirectionButton, { label: 'Left', action: 'LEFT', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
+      React.createElement(DirectionButton, { label: 'Right', action: 'RIGHT', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
     ),
-    React.createElement(DirectionButton, { label: 'Backward', action: 'BACKWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => {} }),
+    React.createElement(DirectionButton, { label: 'Backward', action: 'BACKWARD', disabled: !connected, onPressIn: sendAction, onPressOut: () => sendAction('STOP') }),
     React.createElement(
       Pressable,
       {
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0a1a2b', padding: 20, justifyContent: 'center' },
   header: { color: '#fff', fontSize: 28, fontWeight: '700', textAlign: 'center' },
   status: { color: '#9ad0ff', textAlign: 'center', marginVertical: 16, fontSize: 16 },
+  error: { color: '#ffb4b4', textAlign: 'center', marginBottom: 8 },
   connectionRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12, gap: 8 },
   connectionButton: { flex: 1, borderRadius: 10, backgroundColor: '#2b80ff', paddingVertical: 10, alignItems: 'center' },
   disconnectButton: { flex: 1, borderRadius: 10, backgroundColor: '#475569', paddingVertical: 10, alignItems: 'center' },
